@@ -1,0 +1,94 @@
+<project>
+  <Metadata>
+    <metadata>
+      <PackageName>Contact Utilities</PackageName>
+      <Author>Adam Conn</Author>
+      <Version>1.0</Version>
+      <Revision />
+      <License />
+      <Comment />
+      <Attributes />
+      <Readme>This package installs components that facilitate the use
+of contact data in Sitecore.
+
+This package include:
+* a data provider that exposes contact
+facets under /sitecore/system/Settings/Contacts.
+</Readme>
+      <Publisher />
+      <PostStep />
+      <PackageID />
+    </metadata>
+  </Metadata>
+  <SaveProject>True</SaveProject>
+  <Sources>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/templates/Contacts/{C446A6ED-36C3-4886-8988-4B36D4B08336}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member Value/{A7E904FE-CA5C-431F-9213-FDD558195723}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member Value/Data/{EB55E241-FFBB-4A5C-94CF-F1D1A5C0E16A}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member Value/Data/Description/{C77EA4D5-8C0D-4C42-9446-1361BEBF305A}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member Value/Data/Value/{003F0314-81AC-434D-99F5-F37EB53CE1C7}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member/{892E04B2-1349-42B3-9755-77DDFF995055}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member/Data/{0471DC81-E1C7-4A33-8F43-82468D3C99E5}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member/Data/Member Name/{4178EA7A-61EF-4DFA-9AEF-B396FB085AF9}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet Member/Data/Type/{F5154187-5C68-4BAC-B4F2-AE34B38001E3}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet/{B9209A99-F003-48FA-B0D4-B2B55D90A9AB}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet/Data/{784EC74E-8AB4-464A-BC1A-8A439D1B4577}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet/Data/Contract/{DD879D1D-A810-471B-8799-FF5C997AF309}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet/Data/Facet Name/{E1494C88-2D99-4F65-B9D9-EBB4A8BAD4B8}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Contacts/Contact Facet/Data/Implementation/{6F1D8C43-3028-43D9-AD22-AA4851F8E12C}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms>
+            <InstallerConfigurationTransform>
+              <Options>
+                <BehaviourOptions>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
+                </BehaviourOptions>
+              </Options>
+            </InstallerConfigurationTransform>
+          </Transforms>
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>templates</Name>
+    </xitems>
+    <xfiles>
+      <Entries>
+        <x-item>/App_Config/Include/Sitecore.Strategy.Contacts.config</x-item>
+        <x-item>/bin/Sitecore.Strategy.Contacts.dll</x-item>
+      </Entries>
+      <Converter>
+        <FileToEntryConverter>
+          <Root>/</Root>
+          <Transforms>
+            <InstallerConfigurationTransform>
+              <Options>
+                <BehaviourOptions>
+                  <ItemMode>Undefined</ItemMode>
+                  <ItemMergeMode>Undefined</ItemMergeMode>
+                </BehaviourOptions>
+              </Options>
+            </InstallerConfigurationTransform>
+          </Transforms>
+        </FileToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>files</Name>
+    </xfiles>
+  </Sources>
+  <Converter>
+    <TrivialConverter>
+      <Transforms />
+    </TrivialConverter>
+  </Converter>
+  <Include />
+  <Exclude />
+  <Name />
+</project>
