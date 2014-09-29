@@ -1,6 +1,8 @@
 # sitecore-contact-utilities
 This module adds components that make it easier to work with contacts in Sitecore 8.0. 
 
+You can [watch a video](https://www.youtube.com/watch?v=ajSZar5aShc) that shows what this module does.
+
 ## Packages
 In order to make the various components that make up this module managable, this module is broken up into a number of separate package.
 
