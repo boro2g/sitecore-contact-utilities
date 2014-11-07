@@ -1,19 +1,33 @@
 <project>
   <Metadata>
     <metadata>
-      <PackageName>Contact Utilities</PackageName>
+      <PackageName>xDB Contact Utilities</PackageName>
       <Author>Adam Conn</Author>
-      <Version>1.0</Version>
+      <Version>1.1</Version>
       <Revision />
       <License />
       <Comment />
       <Attributes />
-      <Readme>This package installs components that facilitate the use
-of contact data in Sitecore.
+      <Readme>===========================================================
+xDB Contact Utilities
+===========================================================
 
-This package include:
-* a data provider that exposes contact
-facets under /sitecore/system/Settings/Contacts.
+-----------------------------------------------------------
+Prerequisites
+-----------------------------------------------------------
+This module requires Sitecore 7.5 or greater.
+
+-----------------------------------------------------------
+About this module
+-----------------------------------------------------------
+This package installs components that facilitate the use
+of xDB Contacts in Sitecore.
+
+This package includes:
+* a data provider that exposes contact facets as Sitecore 
+  items under /sitecore/system/Settings/Contacts.
+* CustomItem types that expose contact facet properties
+
 </Readme>
       <Publisher />
       <PostStep />

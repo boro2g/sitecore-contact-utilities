@@ -32,12 +32,19 @@ namespace Sitecore.Strategy.Contacts.Items
                     return null;
                 }
                 return Type.GetType(typeName);
-                //var name = this[Sitecore.Strategy.Contacts.DataProviders.FieldIDs.ContactFacetContract];
-                //if (string.IsNullOrEmpty(name))
-                //{
-                //    return null;
-                //}
-                //return ContactFacetHelper.GetContractTypeForFacet(name);
+            }
+        }
+
+        public Type ImplementationType
+        {
+            get
+            {
+                var typeName = this[Sitecore.Strategy.Contacts.DataProviders.FieldIDs.ContactFacetImplementation];
+                if (string.IsNullOrEmpty(typeName))
+                {
+                    return null;
+                }
+                return Type.GetType(typeName);
             }
         }
 

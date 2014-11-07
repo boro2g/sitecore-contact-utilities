@@ -100,6 +100,7 @@
     <Compile Include="Pipelines\GetFacetMemberValues\GetBooleanValues.cs" />
     <Compile Include="Pipelines\GetFacetMemberValues\GetFacetMemberValuesArgs.cs" />
     <Compile Include="Pipelines\GetFacetMemberValues\GetMemberType.cs" />
+    <Compile Include="Pipelines\Initialize\UpdateIDTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

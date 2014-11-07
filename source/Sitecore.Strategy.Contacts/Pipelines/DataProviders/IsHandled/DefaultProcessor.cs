@@ -51,6 +51,19 @@ namespace Sitecore.Strategy.Contacts.Pipelines.DataProviders.IsHandled
                 args.IsHandled = true;
                 return;
             }
+            //
+            //ensure the root node has been loaded
+            var database = args.Context.DataManager.Database;
+            if (database != null)
+            {
+                var item = database.GetItem(Sitecore.Strategy.Contacts.DataProviders.ItemIDs.ContactsFolder);
+                if (item != null)
+                {
+                    //item.GetChildren();
+                }
+            }
+            //
+            //
             if (IDTableHelper.IsFacetItem(args.ItemId))
             {
                 args.IsHandled = true;

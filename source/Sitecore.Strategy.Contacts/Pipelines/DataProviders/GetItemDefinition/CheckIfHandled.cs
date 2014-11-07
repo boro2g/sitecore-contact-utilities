@@ -13,7 +13,7 @@ namespace Sitecore.Strategy.Contacts.Pipelines.DataProviders.GetItemDefinition
         {
             Assert.ArgumentNotNull(args, "args");
             Assert.ArgumentNotNull(args.ItemId, "args.ItemId");
-            var args2 = new IsHandledArgs(args.ItemId);
+            var args2 = new IsHandledArgs(args.ItemId, args.Context);
             CorePipeline.Run("contactFacetDataProvider.isHandled", args2);
             if (!args2.IsHandled)
             {

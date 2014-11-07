@@ -13,7 +13,7 @@ namespace Sitecore.Strategy.Contacts.Pipelines.DataProviders.GetChildIDs
         {
             Assert.ArgumentNotNull(args, "args");
             Assert.ArgumentNotNull(args.ItemDefinition, "args.ItemDefinition");
-            var args2 = new IsHandledArgs(args.ItemDefinition.ID);
+            var args2 = new IsHandledArgs(args.ItemDefinition.ID, args.Context);
             args2.IncludeAllIds = true;
             CorePipeline.Run("contactFacetDataProvider.isHandled", args2);
             if (!args2.IsHandled)
