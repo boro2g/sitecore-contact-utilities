@@ -1,13 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Strategy.Contacts", "Sitecore.Strategy.Contacts\Sitecore.Strategy.Contacts.csproj", "{01946754-56F6-438F-92BB-FAD19C054D30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Strategy.Contacts.Sample", "Sitecore.Strategy.Contacts.Sample\Sitecore.Strategy.Contacts.Sample.csproj", "{B708ECAF-3DC3-4966-BB65-D498900BC96C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Strategy.Contacts.Rules", "Sitecore.Strategy.Contacts.Rules\Sitecore.Strategy.Contacts.Rules.csproj", "{9A27C95C-4C23-4689-9486-54EA703C40E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SitecoreReferences", "SitecoreReferences", "{1013C07C-200D-4F76-B0A3-CC36F34FE02B}"
+	ProjectSection(SolutionItems) = preProject
+		SitecoreReferences\README.txt = SitecoreReferences\README.txt
+		SitecoreReferences\Sitecore.Reference.Path.xml = SitecoreReferences\Sitecore.Reference.Path.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{EDFEB1ED-841F-46C9-A14F-D0F4561352DD}"
+	ProjectSection(SolutionItems) = preProject
+		SitecoreReferences\Lib\Sitecore.Analytics.dll = SitecoreReferences\Lib\Sitecore.Analytics.dll
+		SitecoreReferences\Lib\Sitecore.Analytics.Model.dll = SitecoreReferences\Lib\Sitecore.Analytics.Model.dll
+		SitecoreReferences\Lib\Sitecore.Kernel.dll = SitecoreReferences\Lib\Sitecore.Kernel.dll
+		SitecoreReferences\Lib\Sitecore.Strategy.Adaptive.dll = SitecoreReferences\Lib\Sitecore.Strategy.Adaptive.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +44,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDFEB1ED-841F-46C9-A14F-D0F4561352DD} = {1013C07C-200D-4F76-B0A3-CC36F34FE02B}
 	EndGlobalSection
 EndGlobal
