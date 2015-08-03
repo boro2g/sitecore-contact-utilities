@@ -14,7 +14,6 @@ namespace Sitecore.Strategy.Contacts.Pipelines.Initialize
     {
         public virtual void Process(PipelineArgs args)
         {
-            IDTableHelper.ResetIDTable();
             AddFacets(Sitecore.Strategy.Contacts.DataProviders.ItemIDs.ContactFacetsFolder);
         }
         protected virtual void AddFacets(ID parentId)
