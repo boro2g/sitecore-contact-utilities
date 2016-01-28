@@ -1,11 +1,11 @@
 ﻿using Sitecore.Analytics.Model.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 
 namespace Sitecore.Strategy.Contacts.Sample.Model
 {
+    [Serializable]
     public class EmployeeData : Facet, IEmployeeData
     {
         public EmployeeData()

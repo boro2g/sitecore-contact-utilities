@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Sitecore.Collections;
@@ -6,7 +7,9 @@ using Sitecore.Data;
 using Sitecore.Pipelines;
 using Sitecore.Strategy.Contacts.DataProviders;
 using System.Reflection;
+using Sitecore.Analytics.Model.Framework;
 using Sitecore.Strategy.Contacts.Pipelines.GetFacetMemberValues;
+using Sitecore.Strategy.Contacts.Utils;
 
 namespace Sitecore.Strategy.Contacts.Pipelines.Initialize
 {
@@ -25,24 +28,35 @@ namespace Sitecore.Strategy.Contacts.Pipelines.Initialize
                 AddContactFacetMember(name, facetId);
             }
         }
+
         protected virtual void AddContactFacetMember(string facetName, ID parentId)
         {
             var contractType = ContactFacetHelper.GetContractTypeForFacet(facetName);
-            if (contractType == null)
+
+            foreach (string memberName in FacetReflectionUtil.NonFacetMemberNames(contractType))
             {
-                return;
+                var memberId = IDTableHelper.GenerateIdForFacetMember(memberName, parentId,
+                    Sitecore.Strategy.Contacts.DataProviders.TemplateIDs.ContactFacetMemberTemplate);
+                AddContactFacetMemberValues(facetName, memberName, memberId);
             }
-            var members = contractType.GetMembers();
-            foreach (var member in members)
+
+            foreach (string memberName in FacetReflectionUtil.FacetMemberNames(contractType))
             {
-                if (member.MemberType == MemberTypes.Field || member.MemberType == MemberTypes.Property)
+                foreach (
+                    string subMemberName in
+                        FacetReflectionUtil.NonFacetMemberNames(contractType.GetProperty(memberName).PropertyType))
                 {
-                    var memberId = IDTableHelper.GenerateIdForFacetMember(member, parentId, Sitecore.Strategy.Contacts.DataProviders.TemplateIDs.ContactFacetMemberTemplate);
-                    AddContactFacetMemberValues(facetName, member.Name, memberId);
+                    string key = $"{memberName}{NestedFacets.Delimeter}{subMemberName}";
+
+                    var memberId = IDTableHelper.GenerateIdForFacetMember(key, parentId,
+                        Sitecore.Strategy.Contacts.DataProviders.TemplateIDs.ContactFacetMemberTemplate);
+                    AddContactFacetMemberValues(facetName, key, memberId);
                 }
             }
         }
-        protected virtual void AddContactFacetMemberValues(string facetName, string memberName, ID parentId)
+
+        protected virtual
+            void AddContactFacetMemberValues(string facetName, string memberName, ID parentId)
         {
             var args = new GetFacetMemberValuesArgs(facetName, memberName);
             CorePipeline.Run("getFacetMemberValues", args);
@@ -52,7 +66,7 @@ namespace Sitecore.Strategy.Contacts.Pipelines.Initialize
             }
             foreach (var pair in args.Values)
             {
-                IDTableHelper.GenerateIdForFacetMemberValue(pair.Key, pair.Value, parentId, Sitecore.Strategy.Contacts.DataProviders.TemplateIDs.ContactFacetMemberValueTemplate);
+                IDTableHelper.GenerateIdForFacetMemberValue($"{facetName}-{memberName}-{pair.Key}", pair.Value, parentId, Sitecore.Strategy.Contacts.DataProviders.TemplateIDs.ContactFacetMemberValueTemplate);
             }
         }
 

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Sitecore.Strategy.Contacts.DataProviders;
 
 namespace Sitecore.Strategy.Contacts.Items
 {
@@ -43,7 +44,8 @@ namespace Sitecore.Strategy.Contacts.Items
                 {
                     return null;
                 }
-                return type.GetMember(name).FirstOrDefault();
+
+                return ContactFacetHelper.GetFacetMemberInfo(type, name);
             }
         }
 

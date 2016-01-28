@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sitecore.Diagnostics;
 using Sitecore.Strategy.Contacts.Pipelines.GetFacetMemberValues;
 using Sitecore.Strategy.Contacts.DataProviders;

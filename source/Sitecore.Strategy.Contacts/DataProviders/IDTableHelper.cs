@@ -50,12 +50,12 @@ namespace Sitecore.Strategy.Contacts.DataProviders
             return id;
         }
 
-        public static ID GenerateIdForFacetMember(MemberInfo memberInfo, ID parentId, ID templateId)
+        public static ID GenerateIdForFacetMember(string memberInfoName, ID parentId, ID templateId)
         {
             var prefix = "facet-member";
-            var id = GenerateIdForValue(prefix, string.Format("{0}-{1}", memberInfo.Name, parentId.ToString()));
+            var id = GenerateIdForValue(prefix, string.Format("{0}-{1}", memberInfoName, parentId.ToString()));
             var customData = string.Format("templateId={0}", templateId.ToString());
-            UpdateOrCreateIDTableEntry(prefix, memberInfo.Name, id, parentId, customData);
+            UpdateOrCreateIDTableEntry(prefix, memberInfoName, id, parentId, customData);
             return id;
         }
 

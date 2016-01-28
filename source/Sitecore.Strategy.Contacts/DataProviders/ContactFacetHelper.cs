@@ -5,6 +5,7 @@ using System.Xml;
 using Sitecore.Configuration;
 using Sitecore.Xml;
 using System.Reflection;
+using Sitecore.Strategy.Contacts.Utils;
 
 namespace Sitecore.Strategy.Contacts.DataProviders
 {
@@ -70,30 +71,76 @@ namespace Sitecore.Strategy.Contacts.DataProviders
             return type;
         }
 
+        public static MemberInfo GetFacetMemberInfo(Type facetType, string memberName)
+        {
+            if (facetType == null)
+            {
+                return null;
+            }
+
+            string[] parts = memberName.Split(NestedFacets.Delimeter.ToCharArray());
+
+            if (parts.Length > 1)
+            {
+                return GetNestedFacetMemberInfo(facetType, parts);
+            }
+
+            var member = facetType.GetMember(memberName).FirstOrDefault();
+
+            return member;
+        }
+
+        public static Type GetFacetMemberType(Type facetType, string memberName)
+        {
+            if (facetType == null)
+            {
+                return null;
+            }
+
+            return FacetMemberType(GetFacetMemberInfo(facetType, memberName));
+        }
+
         public static Type GetFacetMemberType(string facetName, string memberName)
         {
-            var contractType = GetContractTypeForFacet(facetName);
-            if (contractType == null)
+            return GetFacetMemberType(GetContractTypeForFacet(facetName), memberName);
+        }
+
+        private static Type FacetMemberType(MemberInfo member)
+        {
+            if (member?.MemberType == MemberTypes.Property)
             {
-                return null;
+                return ((PropertyInfo) member).PropertyType;
             }
-            var member = contractType.GetMember(memberName).FirstOrDefault();
-            if (member == null)
+
+            if (member?.MemberType == MemberTypes.Field)
             {
-                return null;
+                return ((FieldInfo) member).FieldType;
             }
-            if (member.MemberType == MemberTypes.Property)
+
+            if (member?.MemberType == MemberTypes.Method)
             {
-                return ((PropertyInfo)member).PropertyType;
+                return ((MethodInfo) member).ReturnType;
             }
-            else if (member.MemberType == MemberTypes.Field)
+
+            return null;
+        }
+
+        private static MemberInfo GetNestedFacetMemberInfo(Type contractType, string[] parts)
+        {
+            foreach (string part in parts)
             {
-                return ((FieldInfo)member).FieldType;
+                var member = contractType.GetMember(part).FirstOrDefault();
+
+                if (parts.Length == 1)
+                {
+                    return member;
+                }
+                else
+                {
+                    return GetNestedFacetMemberInfo(FacetMemberType(member), parts.Skip(1).ToArray());
+                }
             }
-            else if (member.MemberType == MemberTypes.Method)
-            {
-                return ((MethodInfo)member).ReturnType;
-            }
+
             return null;
         }
     }

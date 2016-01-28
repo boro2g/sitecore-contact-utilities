@@ -2,10 +2,9 @@
 using Sitecore.Data;
 using Sitecore.Strategy.Contacts.Items;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web;
+using Sitecore.Strategy.Contacts.Utils;
 
 namespace Sitecore.Strategy.Contacts.DataProviders
 {
@@ -27,24 +26,22 @@ namespace Sitecore.Strategy.Contacts.DataProviders
             var facet = contact.Facets[facetName];
             return facet;
         }
-        private static MemberInfo GetFacetMember(Database database, ID contactFacetId, ID contactFacetMemberId)
+        private static ContactFacetMemberItem GetFacetMember(Database database, ID contactFacetId, ID contactFacetMemberId)
         {
             var facet = GetFacet(database, contactFacetId);
+
             if (facet == null)
             {
                 return null;
             }
+
             ContactFacetMemberItem cfmItem = database.GetItem(contactFacetMemberId);
-            if (cfmItem == null)
-            {
-                return null;
-            }
-            var member = cfmItem.Member;
-            return member;
+
+            return cfmItem;
         }
         public static Type GetFacetMemberValueType(Database database, ID contactFacetId, ID contactFacetMemberId)
         {
-            var member = GetFacetMember(database, contactFacetId, contactFacetMemberId);
+            var member = GetFacetMember(database, contactFacetId, contactFacetMemberId).Member;
             if (member == null)
             {
                 return null;
@@ -83,19 +80,42 @@ namespace Sitecore.Strategy.Contacts.DataProviders
                 return null;
             }
             var member = GetFacetMember(database, contactFacetId, contactFacetMemberId);
-            if (member == null)
+
+            string[] parts = member.DisplayName.Split(NestedFacets.Delimeter.ToCharArray());
+
+            if (parts.Length > 1)
             {
-                return null;
+                return FindNestedPropertyValue(facet, parts);
             }
-            if (member.MemberType == MemberTypes.Property)
+
+            if (member.Member.MemberType == MemberTypes.Property)
             {
-                var property = member as PropertyInfo;
-                if (property == null)
+                var property = member.Member as PropertyInfo;
+                return property?.GetValue(facet);
+            }
+
+            return null;
+        }
+
+        private static object FindNestedPropertyValue(object entity, string[] parts)
+        {
+            foreach (string part in parts)
+            {
+                PropertyInfo property = entity.GetType().GetProperty(part);
+
+                if (property != null)
                 {
-                    return null;
+                    if (parts.Length == 1)
+                    {
+                        return property.GetValue(entity);
+                    }
+                    else
+                    {
+                        return FindNestedPropertyValue(property.GetValue(entity), parts.Skip(1).ToArray());
+                    }
                 }
-                return property.GetValue(facet);
             }
+
             return null;
         }
     }
